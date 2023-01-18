@@ -1,4 +1,5 @@
 const { Schema, model, isObjectIdOrHexString } = require('mongoose');
+const moment = require('moment');
 
 const reactionSchema = new Schema(
     {
@@ -18,7 +19,23 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            //getter to format
+            get: (date) => formatReturnedDate(date),
         }
+    },
+    {
+        toJSON: {
+            virtuals: true,
+            getters: true,
+        },
+        id: false,
+        timestamps: true,
     }
-)
+);
+
+//function to format dates for createdAt
+function formatReturnedDate(date) {
+    let finalDate = date.moment().format("dddd, MMMM Do YYYY, h:mm a");
+    return finalDate;
+};
+
+module.exports = reactionSchema;

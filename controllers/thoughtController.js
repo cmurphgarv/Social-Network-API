@@ -72,7 +72,7 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({
-                        message: 'thought created but no user with this id!',
+                        message: 'No user with this id!',
                     })
                     : res.json({ message: 'thought successfully deleted!' })
             )

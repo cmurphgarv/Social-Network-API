@@ -4,10 +4,6 @@
 
 API which can create users, connect them with friends, create thoughts shared by users and comments on those thoughts from other users.
 
-## Preview
-
-![Video]()
-
 ## Installation
 
 npm install

@@ -1,11 +1,11 @@
-const { Schema, model, isObjectIdOrHexString } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 const moment = require('moment');
 
 const reactionSchema = new Schema(
     {
         reactionId: {
-            type: ObjectId(),
-            default: new ObjectId(),
+            type: Types.ObjectId,
+            default: new Types.ObjectId(),
         },
         reactionBody: {
             type: String,
@@ -34,7 +34,7 @@ const reactionSchema = new Schema(
 
 //function to format dates for createdAt
 function formatReturnedDate(date) {
-    let finalDate = date.moment().format("dddd, MMMM Do YYYY, h:mm a");
+    let finalDate = moment(date).format("dddd, MMMM Do YYYY, h:mm a");
     return finalDate;
 };
 

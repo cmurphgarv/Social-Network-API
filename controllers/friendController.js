@@ -3,9 +3,11 @@ const User = require('../models/User');
 module.exports = {
 
     createFriend(req, res) {
+        // console.log(req.params)
         return User.findOneAndUpdate(
-            { _id: req.body.userId },
-            { $addToSet: { friends: req.body.friendId } },
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.params.friendId
+             } },
             { new: true }
         )
             .then((user) =>
@@ -23,8 +25,8 @@ module.exports = {
 
     deleteFriend(req, res) {
         return User.findOneAndUpdate(
-            { _id: req.body.userId},
-            { $pull: { friends: req.body.friendId } },
+            { _id: req.params.userId},
+            { $pull: { friends: req.params.friendId } },
             { new: true }
         )
         .then((user) =>

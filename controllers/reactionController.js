@@ -4,11 +4,10 @@ module.exports = {
     //POST a reaction
     createReaction(req, res) {
         return Thought.findOneAndUpdate(
-            { _id: req.body.thoughtId },
-            { $addToSet: { reactions: req.body.reactionId } },
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: req.body } },
             { new: true }
-        )
-            .then((thought) =>
+        ).then((thought) =>
                 !thought
                     ? res
                         .status(404)
@@ -23,8 +22,8 @@ module.exports = {
     //DELETE a reaction
     deleteReaction(req, res) {
         return Thought.findOneAndUpdate(
-            { _id: req.body.thoughtId},
-            { $pull: { friends: req.body.reactionId } },
+            { _id: req.params.thoughtId},
+            { $pull: { reactions: { reactionId: req.params.reactionId }} },
             { new: true }
         )
         .then((thought) =>
@@ -39,5 +38,3 @@ module.exports = {
 
     
 };
-
-
